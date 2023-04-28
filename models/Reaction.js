@@ -1,9 +1,9 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 const reactionSchema = new Schema({
   reactionId: {
-    type: mongoose.Schema.Types.ObjectId, //to check
-    //default://Default value is set to a new ObjectId
+    type: Schema.Types.ObjectId, //to check
+    default: ()=> new Types.ObjectId(),//Default value is set to a new ObjectId
   },
   reactionBody:{
     type:String,
@@ -18,12 +18,13 @@ const reactionSchema = new Schema({
     type:Date,
     default:Date.now,
     //Use a getter method to format the timestamp on query
-    // get: (date) => {}
+     get: (date) => {return moment(date).format("MM/DD/YYYY hh:mm:ss")}
   }
 },
 {//not sure if we need virtuals here
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     id: false,
   });

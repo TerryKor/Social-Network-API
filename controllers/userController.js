@@ -26,7 +26,25 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+//update user 
 
+async updateUser (req, res){
+  try{
+    const updateUser = await User.findOneAndUpdate(
+      { _id: req.params.userId },
+      {$set: req.body},
+      {runValidators: true, new:true}
+      )
+      if(!updateUser){
+        return res.status(404).json({message:"No user with that ID to update" })
+      }
+      res.jeson(updateUser)
+
+  }catch(err){
+    console.log(err);
+    res.status(500).json(err);
+  }
+},
   //creating one user
   async createUser(req, res) {
     try {
