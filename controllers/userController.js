@@ -38,7 +38,7 @@ async updateUser (req, res){
       if(!updateUser){
         return res.status(404).json({message:"No user with that ID to update" })
       }
-      res.jeson(updateUser)
+      res.json(updateUser)
 
   }catch(err){
     console.log(err);
@@ -58,7 +58,7 @@ async updateUser (req, res){
   async deleteUser(req, res) {
     try {
       const deleteOneUserAndThought = await User.findOneAndDelete({
-        _id: req.params.userdId,
+        _id: req.params.userId,
       });
       if (!deleteOneUserAndThought) {
         return res.status(404).json({ message: "No user with that ID" });
