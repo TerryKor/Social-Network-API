@@ -4,7 +4,7 @@ const moment = require("moment")
 
 const thoughtSchema = new Schema(
   {
-    thoughtText: { String, required: true, minlength: 1, maxlength: 280 },
+    thoughtText: { type: String, required: true, minlength: 1, maxlength: 280 },
 
     createdAt: {
       type: Date,
