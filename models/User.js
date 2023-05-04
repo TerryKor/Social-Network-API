@@ -8,7 +8,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      match: [
+      match: [//regex patters vaildaes email address
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         "Please fill a valid email address",
       ],
@@ -34,7 +34,7 @@ const userSchema = new Schema(
     },
     id: false,
   }
-);
+);//virtual to get number of friends as this field is not in database
 userSchema.virtual("friendCount").get(function () {
   return `${this.friends.length}`;
 });

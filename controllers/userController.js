@@ -2,7 +2,7 @@ const { User, Thought } = require("../models");
 const { findOneAndUpdate } = require("../models/User");
 
 module.exports = {
-  //getting all users
+  //controller getting all users
   async getAllUsers(req, res) {
     try {
       const users = await User.find();
@@ -11,7 +11,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  //getting one user
+  //controller getting one user
   async getOneUser(req, res) {
     try {
       const oneUser = await User.findOne({ _id: req.params.userId }).select(
@@ -27,7 +27,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  //update user
+  //controller to update user
 
   async updateUser(req, res) {
     try {
@@ -56,7 +56,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  //deleting user and associated thoughts
+  //controller deleting user and associated thoughts
   async deleteUser(req, res) {
     try {
       const deleteOneUserAndThought = await User.findOneAndDelete({
@@ -64,7 +64,7 @@ module.exports = {
       });
       if (!deleteOneUserAndThought) {
         return res.status(404).json({ message: "No user with that ID" });
-      }
+      }// deleting multiple thoughts filters by checking if the the IDs are in user thoughts array
       await Thought.deleteMany({
         _id: { $in: deleteOneUserAndThought.thoughts },
       });
@@ -73,6 +73,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+  //controller updating user with new friend
   async addfriend(req, res) {
     try {
       const user = await User.findOneAndUpdate(
@@ -88,6 +89,7 @@ module.exports = {
       res.status(500).json;
     }
   },
+  //controller deleting friend from friends list
   async removeFriend(req, res) {
     try {
       const user = await User.findOneAndUpdate(

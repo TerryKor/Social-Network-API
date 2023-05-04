@@ -4,7 +4,7 @@ const moment  = require("moment")
 const reactionSchema = new Schema(
   {
     reactionId: {
-      type: Schema.Types.ObjectId, //to check
+      type: Schema.Types.ObjectId, 
       default: () => new Types.ObjectId(), //Default value is set to a new ObjectId
     },
     reactionBody: {
@@ -26,10 +26,9 @@ const reactionSchema = new Schema(
     },
   },
   {
-    //not sure if we need virtuals here
     toJSON: {
       virtuals: true,
-      getters: true,
+      getters: true,//allow getters for the date
     },
     id: false,
   }

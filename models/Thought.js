@@ -13,7 +13,7 @@ const thoughtSchema = new Schema(
       get: (date) => {return moment(date).format("MM/DD/YYYY hh:mm:ss")}
     },
     username: {
-      //(The user that created this thought)
+      //The user that created this thought
       type: String,
       required: true,
     },
@@ -27,7 +27,7 @@ const thoughtSchema = new Schema(
     id: false,
   }
 );
-
+//virtual to get number of reactions as this field is not in database
 thoughtSchema.virtual("reactionCount").get(function () {
     return `${this.reactions.length}`;
   });
